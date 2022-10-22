@@ -59,10 +59,67 @@ function ProductAdd(){
             }
      }
 
+     function validateName(){
+        if (formData.name.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                   nameErr: "Please submit required Name data"
+               }
+           ));
+           } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                       nameErr: false
+                   }
+            ));
+           }
+    }
 
+
+    function validatePrice(){
+        if (formData.price.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                   priceErr: "Please submit required Price data"
+               }
+           ));
+           }else if (!(/^\d+(\.\d{2})?$/.test(formData.price))) {
+            setFormData(oldData => (
+                {...oldData, 
+                    priceErr:"Please submit price in n.xx format"
+                }
+            ));
+          } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                       priceErr: false
+                   }
+            ));
+           }
+    }
+
+
+    function validateProductType(){
+        if (formData.productType.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                   selectedErr: "Please select product type"
+               }
+           ));
+          } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                       selectedErr: false
+                   }
+            ));
+           }
+    }
     function submitData(e){
         e.preventDefault();
-        validateSku()
+        validateSku();
+        validatePrice();
+        validateName();
+        validateProductType();
         console.log("Submit clicked");
         console.log(formData);
     }
@@ -78,21 +135,21 @@ function ProductAdd(){
                                 <label className="col-sm-2 col-form-label">SKU</label>
                                 <div className="col-sm-4">
                                     <input type="text" className="form-control" id="sku" value={formData.sku} onChange={setData('sku')}/>
-                                    {formData.skuErr !== false  &&<small className="text-danger" id="skuCheck">{formData.skuErr}</small> }
+                                    {formData.skuErr !== false  && <small className="text-danger">{formData.skuErr}</small> }
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Name</label>
                                 <div className="col-sm-4">
                                     <input type="text" className="form-control" id="name" value={formData.name} onChange={setData('name')}/>
-                                    <small className="text-danger d-none" id="nameCheck">Please, enter the name of the product</small>
+                                    {formData.nameErr !== false  && <small className="text-danger">{formData.nameErr}</small> }
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Price($)</label>
                                 <div className="col-sm-4">
                                     <input type="number" className="form-control" id="price" value={formData.price} onChange={setData('price')}/>
-                                    <small className="text-danger d-none" id="priceCheck">Please, enter the price of the product</small>
+                                    {formData.priceErr !== false  && <small className="text-danger">{formData.priceErr}</small> }
                                 </div>
                             </div>
         
@@ -105,7 +162,7 @@ function ProductAdd(){
                                         <option value="Furniture">Furniture</option>
                                         <option value="Book">Book</option>
                                     </select>
-                                    <small className="text-danger d-none" id="typeCheck">Please, select the product Type</small>
+                                    {formData.selectedErr !== false  && <small className="text-danger">{formData.selectedErr}</small> }
                                 </div>
                             </div>
                             {formData.productType === "DVD" && (

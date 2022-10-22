@@ -1,13 +1,60 @@
-import React from 'react';
+import React, {useState} from 'react';
+import clsx from "clsx";
 import AddProductHeader from '../components/AddHeaderComponent';
+import { useFormValidator } from '../hooks/useFormValidator';
 
 /*-- Add Product Section -- */
 function ProductAdd(){
 
+    const [form, setForm] = useState({ 
+        sku: '', 
+        name: '',
+        price: '', 
+        productType: '',
+        size: '',
+        height: '',
+        width: '',
+        length: '',
+        weight: '',
+
+        skuErr: false,
+        nameErr: false,
+        priceErr: false,
+        selectedErr: false,
+        sizeErr: false,
+        heightErr: false,
+        widthErr: false,
+        lengthErr: false,
+        weightErr: false,
+      });
+
+    const { errors, validateForm, onBlurField } = useFormValidator(form);
+ 
+
+    const onUpdateField = e => {
+        const field = e.target.name;
+        const nextFormState = {
+          ...form,
+          [field]: e.target.value,
+        };
+        setForm(nextFormState);
+        if (errors[field].dirty)
+          validateForm({
+            form: nextFormState,
+            errors,
+            field,
+          });
+      };
+
+
+
     function submitData(e){
         e.preventDefault();
+        const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
+        if (!isValid) return;
 
-        console.log("Submit clicked");
+        // console.log("Form is clean");
+        // console.log(formData);
     }
 
     return (
@@ -20,93 +67,111 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">SKU</label>
                                 <div className="col-sm-4">
-                                    <input type="text" className="form-control" id="sku"/>
-                                    <small className="text-danger d-none" id="skuCheck">Please, Enter SKU</small>
+                                    <input type="text" className="form-control" id="sku" name="sku" value={form.sku} onChange={onUpdateField}  onBlur={onBlurField}/>
+                                    {errors.sku.dirty && errors.sku.error ? (<small className="text-danger">{errors.sku.message}</small> ) : null}
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Name</label>
                                 <div className="col-sm-4">
-                                    <input type="text" className="form-control" id="name"/>
-                                    <small className="text-danger d-none" id="nameCheck">Please, enter the name of the product</small>
+                                    <input type="text" className="form-control" id="name" name="name" value={form.name} onChange={onUpdateField} onBlur={onBlurField}/>
+                                    {errors.name.dirty && errors.name.error ? (<small className="text-danger">{errors.name.message}</small> ) : null}
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Price($)</label>
                                 <div className="col-sm-4">
-                                    <input type="number" className="form-control" id="price"/>
-                                    <small className="text-danger d-none" id="priceCheck">Please, enter the price of the product</small>
+                                    <input type="number" className="form-control" name="price" id="price" value={form.price} onChange={onUpdateField} onBlur={onBlurField}/>
+                                    {errors.price.dirty && errors.price.error ? (<small className="text-danger">{errors.price.message}</small> ) : null}
                                 </div>
                             </div>
         
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" aria-label="Default select example" id="productType">
+                                    <select className="form-select" name="productType" aria-label="Default select example" id="productType" value={form.productType} onChange={onUpdateField} onBlur={onBlurField}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
                                         <option value="Book">Book</option>
                                     </select>
-                                    <small className="text-danger d-none" id="typeCheck">Please, select the product Type</small>
+                                    {errors.type.dirty && errors.type.error ? (<small className="text-danger">{errors.type.message}</small> ) : null}
                                 </div>
                             </div>
-                            <div className="d-none" id="dvd">
+                            {form.productType === "DVD" && (
+                            <div className="" id="dvd">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Size(MB)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="size"/>
+                                        <input type="number" className="form-control" id="size" value={form.size} onChange={onUpdateField}  onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        <small className="mt-2" id="sizeCheck" ><strong>Please, provide size in MB</strong></small>
+                                    {errors.size.dirty && errors.size.error ? (<small className="text-danger">{errors.size.message}</small> ) : null}
                                     </div>
                                 </div>
                             </div>
-        
-                            <div id="furniture" className="d-none">
+                             )}
+
+                            {form.productType === "Furniture" && (
+                            <div id="furniture" className="">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Height (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="height"/>
+                                        <input type="number" className="form-control" id="height" value={form.height} onChange={onUpdateField} onBlur={onBlurField}/>
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
+                                    <div className="col-sm-2"></div>
+                                    <div className="col-sm-4">
+                                    {errors.height.dirty && errors.height.error ? (<small className="text-danger">{errors.height.message}</small> ) : null}
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Width (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="width"/>
+                                        <input type="number" className="form-control" id="width" value={form.width} onChange={onUpdateField} onBlur={onBlurField}/>
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
+                                    <div className="col-sm-2"></div>
+                                    <div className="col-sm-4">
+                                    {errors.width.dirty && errors.width.error ? (<small className="text-danger">{errors.width.message}</small> ) : null}
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Length (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="length"/>
+                                        <input type="number" className="form-control" id="length" value={form.length} onChange={onUpdateField} onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        <small id="dimensionCheck"><strong>Please, provide dimensions in HxWxL</strong></small>
+                                    {errors.length.dirty && errors.length.error ? (<small className="text-danger">{errors.length.message}</small> ) : null}
                                     </div>
                                 </div>
                             </div>
-        
-                            <div className="d-none" id="book">
+                            )}
+
+                            {form.productType === "Book" && (
+                            <div className="" id="book">
                                 <div className="row mb-3"  >
                                     <label className="col-sm-2 col-form-label">Weight(Kg)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="weight"/>
+                                        <input type="number" className="form-control" id="weight" value={form.weight} onChange={onUpdateField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        <small className="mt-2" id="weightCheck"><strong>Please, provide weight in Kg</strong></small>
+                                    {errors.weight.dirty && errors.weight.error ? (<small className="text-danger">{errors.weight.message}</small> ) : null}
                                     </div>
                                 </div>
                             </div>
+                            )}
                         </form>
                     </div>
                 </div>

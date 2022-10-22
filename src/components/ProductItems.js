@@ -12,9 +12,9 @@ function ProductItem(props){
                         <small className="card-text my-0">{props.product.sku}</small>
                         <small className="card-text my-0">{props.product.name}</small>
                         <small className="card-text my-0">{props.product.price} $</small>
-                        {props.product.type == "DVD" && <small className="card-text my-0">Size: {props.product.size} MB</small>}
-                        {props.product.type == "Book" &&  <small className="card-text my-0">Weight: {props.product.weight} kG</small>}
-                        {props.product.type == "Furniture" && <small className="card-text my-0">Dimension: {props.product.height}x{props.product.width}x{props.product.length}</small>}
+                        {props.product.type === "DVD" && <small className="card-text my-0">Size: {props.product.size} MB</small>}
+                        {props.product.type === "Book" &&  <small className="card-text my-0">Weight: {props.product.weight} kG</small>}
+                        {props.product.type === "Furniture" && <small className="card-text my-0">Dimension: {props.product.height}x{props.product.width}x{props.product.length}</small>}
                     </div>
                 </div>
             </div>

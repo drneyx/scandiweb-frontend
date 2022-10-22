@@ -14,6 +14,16 @@ function ProductAdd(){
         width: '',
         length: '',
         weight: '',
+
+        skuErr: false,
+        nameErr: false,
+        priceErr: false,
+        selectedErr: false,
+        sizeErr: false,
+        heightErr: false,
+        widthErr: false,
+        lengthErr: false,
+        weightErr: false,
       });
     
       
@@ -27,9 +37,32 @@ function ProductAdd(){
         }
     };
 
+    function validateSku(){
+         if (formData.sku.length === 0) {
+            setFormData(oldData => (
+                {...oldData, 
+                    skuErr: "Please submit required SKU data"
+                }
+            ));
+            } else if (!(/^\S+$/.test(formData.sku))) {
+            setFormData(oldData => (
+                    {...oldData, 
+                        skuErr: "Please submit an unique SKU without spaces"
+                    }
+                ));
+            } else {
+            setFormData(oldData => (
+                    {...oldData, 
+                        skuErr: false
+                    }
+             ));
+            }
+     }
+
 
     function submitData(e){
         e.preventDefault();
+        validateSku()
         console.log("Submit clicked");
         console.log(formData);
     }
@@ -45,7 +78,7 @@ function ProductAdd(){
                                 <label className="col-sm-2 col-form-label">SKU</label>
                                 <div className="col-sm-4">
                                     <input type="text" className="form-control" id="sku" value={formData.sku} onChange={setData('sku')}/>
-                                    <small className="text-danger d-none" id="skuCheck">Please, Enter SKU</small>
+                                    {formData.skuErr !== false  &&<small className="text-danger" id="skuCheck">{formData.skuErr}</small> }
                                 </div>
                             </div>
                             <div className="row mb-3">
@@ -75,7 +108,8 @@ function ProductAdd(){
                                     <small className="text-danger d-none" id="typeCheck">Please, select the product Type</small>
                                 </div>
                             </div>
-                            <div className="d-none" id="dvd">
+                            {formData.productType === "DVD" && (
+                            <div className="" id="dvd">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Size(MB)</label>
                                     <div className="col-sm-4">
@@ -89,8 +123,10 @@ function ProductAdd(){
                                     </div>
                                 </div>
                             </div>
-        
-                            <div id="furniture" className="d-none">
+                             )}
+
+                            {formData.productType === "Furniture" && (
+                            <div id="furniture" className="">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Height (CM)</label>
                                     <div className="col-sm-4">
@@ -116,8 +152,10 @@ function ProductAdd(){
                                     </div>
                                 </div>
                             </div>
-        
-                            <div className="d-none" id="book">
+                            )}
+
+                            {formData.productType === "Book" && (
+                            <div className="" id="book">
                                 <div className="row mb-3"  >
                                     <label className="col-sm-2 col-form-label">Weight(Kg)</label>
                                     <div className="col-sm-4">
@@ -131,6 +169,7 @@ function ProductAdd(){
                                     </div>
                                 </div>
                             </div>
+                            )}
                         </form>
                     </div>
                 </div>

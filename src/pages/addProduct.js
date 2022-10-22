@@ -114,13 +114,161 @@ function ProductAdd(){
             ));
            }
     }
-    function submitData(e){
-        e.preventDefault();
+
+    function validateSize(){
+        if (formData.size.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                   sizeErr: "Please provide data of indicated type"
+               }
+           ));
+          } else if (!(/^\d+$/.test(formData.size))) {
+            setFormData(oldData => (
+                {...oldData, 
+                    sizeErr: "Please submit Size data in n format"
+                }
+            ));
+          } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                       sizeErr: false
+                   }
+            ));
+         }
+    }
+
+    function validateHeight(){
+        if (formData.height.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                   heightErr: "Please provide data of indicated type"
+               }
+           ));
+          } else if (!(/^[1-9]\d*$|^[0-9]+\.[0-9]+$/.test(formData.height))) {
+            setFormData(oldData => (
+                {...oldData, 
+                    heightErr: "Please submit Height data in n or n.n format"
+                }
+            ));
+          } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                    heightErr: false
+                   }
+            ));
+         }
+    }
+
+
+    function validateLength(){
+        if (formData.length.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                lengthErr: "Please provide data of indicated type"
+               }
+           ));
+          } else if (!(/^[1-9]\d*$|^[0-9]+\.[0-9]+$/.test(formData.length))) {
+            setFormData(oldData => (
+                {...oldData, 
+                    lengthErr: "Please submit length data in n or n.n format"
+                }
+            ));
+          } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                    lengthErr: false
+                   }
+            ));
+         }
+    }
+
+
+    function validateWidth(){
+        if (formData.width.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                widthErr: "Please provide data of indicated type"
+               }
+           ));
+          } else if (!(/^[1-9]\d*$|^[0-9]+\.[0-9]+$/.test(formData.length))) {
+            setFormData(oldData => (
+                {...oldData, 
+                    widthErr: "Please submit width data in n or n.n format"
+                }
+            ));
+          } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                    widthErr: false
+                   }
+            ));
+         }
+    }
+
+
+    function validateWeight(){
+        if (formData.weight.length === 0) {
+           setFormData(oldData => (
+               {...oldData, 
+                   weightErr: "Please provide data of indicated type"
+               }
+           ));
+          } else if (!(/^[1-9]\d*$|^[0-9]+\.[0-9]+$/.test(formData.weight))) {
+            setFormData(oldData => (
+                {...oldData, 
+                    weightErr: "Please submit Weight data in n or n.n format"
+                }
+            ));
+          } else {
+           setFormData(oldData => (
+                   {...oldData, 
+                    weightErr: false
+                   }
+            ));
+         }
+    }
+
+    function formValidation(){
         validateSku();
         validatePrice();
         validateName();
         validateProductType();
-        console.log("Submit clicked");
+        if (formData.skuErr !== false || formData.nameErr !== false || formData.priceErr !== false || formData.selectedErr !== false){
+            return false;
+        }
+
+        else if (formData.productType === "DVD"){
+            validateSize();
+            if (formData.sizeErr !== false){
+                return false;
+            }
+        }
+
+        else if (formData.productType === "Book"){
+            validateWeight();
+            if (formData.weightErr !== false){
+                return false;
+            }
+        }
+
+        else if (formData.productType === "Furniture"){
+            validateWidth();
+            validateHeight();
+            validateLength();
+            if (formData.lengthErr !== false || formData.weightErr !== false|| formData.heightErr !== false){
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+
+
+    function submitData(e){
+        e.preventDefault();
+        formValidation();
+        console.log("Form is clean");
         console.log(formData);
     }
 

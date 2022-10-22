@@ -324,7 +324,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        <small className="mt-2" id="sizeCheck" ><strong>Please, provide size in MB</strong></small>
+                                        {formData.sizeErr !== false  && <small className="text-danger">{formData.sizeErr}</small> }
                                     </div>
                                 </div>
                             </div>
@@ -339,9 +339,21 @@ function ProductAdd(){
                                     </div>
                                 </div>
                                 <div className="row mb-3">
+                                    <div className="col-sm-2"></div>
+                                    <div className="col-sm-4">
+                                        {formData.heightErr !== false  && <small className="text-danger">{formData.heightErr}</small> }
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Width (CM)</label>
                                     <div className="col-sm-4">
                                         <input type="number" className="form-control" id="width" value={formData.width} onChange={setData('width')}/>
+                                    </div>
+                                </div>
+                                <div className="row mb-3">
+                                    <div className="col-sm-2"></div>
+                                    <div className="col-sm-4">
+                                        {formData.weightErr !== false  && <small className="text-danger">{formData.weightErr}</small> }
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -353,7 +365,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        <small id="dimensionCheck"><strong>Please, provide dimensions in HxWxL</strong></small>
+                                        {formData.lengthErr !== false  && <small className="text-danger">{formData.lengthErr}</small> }
                                     </div>
                                 </div>
                             </div>
@@ -370,7 +382,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        <small className="mt-2" id="weightCheck"><strong>Please, provide weight in Kg</strong></small>
+                                        {formData.weightErr !== false  && <small className="text-danger">{formData.weightErr}</small> }
                                     </div>
                                 </div>
                             </div>

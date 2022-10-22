@@ -19,7 +19,7 @@ function ProductList(){
     /* --- Render all products --- */
     const renderProductItems = products.map((product) => {
         return (
-          <ProductItem product={product}/>
+          <ProductItem key={product.id} product={product}/>
         );
     });
 

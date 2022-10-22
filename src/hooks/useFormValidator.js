@@ -77,7 +77,7 @@ export const useFormValidator = form => {
     let isValid = true;
 
     // Create a deep copy of the errors
-    const nextErrors = JSON.parse(JSON.stringify(errors));
+    let nextErrors = JSON.parse(JSON.stringify(errors));
 
 
     // Force validate all the fields
@@ -111,7 +111,7 @@ export const useFormValidator = form => {
     }
 
     if (nextErrors.type.dirty && (field ? field === "type" : true)) {
-        const typeMessage = productTypeValidator(price, form);
+        const typeMessage = productTypeValidator(type, form);
         nextErrors.type.error = !!typeMessage;
         nextErrors.type.message = typeMessage;
         if (!!typeMessage) isValid = false;
@@ -153,6 +153,36 @@ export const useFormValidator = form => {
         nextErrors.width.message = widthMessage;
         if (!!widthMessage) isValid = false;
     }
+
+    setErrors(nextErrors);
+
+    return {
+        isValid,
+        errors: nextErrors,
+      };
  }
+
+
+ const onBlurField = e => {
+    const field = e.target.name;
+    const fieldError = errors[field];
+    if (fieldError.dirty) return;
+
+    const updatedErrors = {
+      ...errors,
+      [field]: {
+        ...errors[field],
+        dirty: true,
+      },
+    };
+
+    validateForm({ form, field, errors: updatedErrors });
+  };
+
+  return {
+    validateForm,
+    onBlurField,
+    errors,
+  };
 
 }

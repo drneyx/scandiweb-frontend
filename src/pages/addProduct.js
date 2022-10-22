@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import clsx from "clsx";
 import AddProductHeader from '../components/AddHeaderComponent';
+import { useFormValidator } from '../hooks/useFormValidator';
 
 /*-- Add Product Section -- */
 function ProductAdd(){
 
-    const [formData, setFormData] = useState({ 
+    const [form, setForm] = useState({ 
         sku: '', 
         name: '',
         price: '', 
@@ -26,35 +28,33 @@ function ProductAdd(){
         weightErr: false,
       });
 
-    const [isvalid, setIsValid] = useState(true);
-
+    const { errors, validateForm, onBlurField } = useFormValidator(form);
+ 
 
     const onUpdateField = e => {
+        const field = e.target.name;
         const nextFormState = {
-          ...formData,
-          [e.target.name]: e.target.value,
+          ...form,
+          [field]: e.target.value,
         };
-        setFormData(nextFormState);
-    };
-    
-      
-    const setData = name => {
-        return ({ target: { value } }) => {
-          setFormData(oldData => (
-            {...oldData, 
-                [name]: value 
-            }
-            ));
-        }
-    };
+        setForm(nextFormState);
+        if (errors[field].dirty)
+          validateForm({
+            form: nextFormState,
+            errors,
+            field,
+          });
+      };
 
 
 
     function submitData(e){
         e.preventDefault();
+        const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
+        if (!isValid) return;
 
         // console.log("Form is clean");
-        console.log(formData);
+        // console.log(formData);
     }
 
     return (
@@ -67,107 +67,107 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">SKU</label>
                                 <div className="col-sm-4">
-                                    <input type="text" className="form-control" id="sku" name="sku" value={formData.sku} onChange={onUpdateField}/>
-                                    {formData.skuErr !== false  && <small className="text-danger">{formData.skuErr}</small> }
+                                    <input type="text" className="form-control" id="sku" name="sku" value={form.sku} onChange={onUpdateField}  onBlur={onBlurField}/>
+                                    {errors.sku.dirty && errors.sku.error ? (<small className="text-danger">{errors.sku.message}</small> ) : null}
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Name</label>
                                 <div className="col-sm-4">
-                                    <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={onUpdateField}/>
-                                    {formData.nameErr !== false  && <small className="text-danger">{formData.nameErr}</small> }
+                                    <input type="text" className="form-control" id="name" name="name" value={form.name} onChange={onUpdateField} onBlur={onBlurField}/>
+                                    {errors.name.dirty && errors.name.error ? (<small className="text-danger">{errors.name.message}</small> ) : null}
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Price($)</label>
                                 <div className="col-sm-4">
-                                    <input type="number" className="form-control" id="price" value={formData.price} onChange={setData('price')}/>
-                                    {formData.priceErr !== false  && <small className="text-danger">{formData.priceErr}</small> }
+                                    <input type="number" className="form-control" name="price" id="price" value={form.price} onChange={onUpdateField} onBlur={onBlurField}/>
+                                    {errors.price.dirty && errors.price.error ? (<small className="text-danger">{errors.price.message}</small> ) : null}
                                 </div>
                             </div>
         
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" aria-label="Default select example" id="productType" value={formData.productType} onChange={setData('productType')}>
+                                    <select className="form-select" name="productType" aria-label="Default select example" id="productType" value={form.productType} onChange={onUpdateField} onBlur={onBlurField}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
                                         <option value="Book">Book</option>
                                     </select>
-                                    {formData.selectedErr !== false  && <small className="text-danger">{formData.selectedErr}</small> }
+                                    {errors.type.dirty && errors.type.error ? (<small className="text-danger">{errors.type.message}</small> ) : null}
                                 </div>
                             </div>
-                            {formData.productType === "DVD" && (
+                            {form.productType === "DVD" && (
                             <div className="" id="dvd">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Size(MB)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="size" value={formData.size} onChange={setData('size')} />
+                                        <input type="number" className="form-control" id="size" value={form.size} onChange={onUpdateField}  onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        {formData.sizeErr !== false  && <small className="text-danger">{formData.sizeErr}</small> }
+                                    {errors.size.dirty && errors.size.error ? (<small className="text-danger">{errors.size.message}</small> ) : null}
                                     </div>
                                 </div>
                             </div>
                              )}
 
-                            {formData.productType === "Furniture" && (
+                            {form.productType === "Furniture" && (
                             <div id="furniture" className="">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Height (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="height" value={formData.height} onChange={setData('height')}/>
+                                        <input type="number" className="form-control" id="height" value={form.height} onChange={onUpdateField} onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        {formData.heightErr !== false  && <small className="text-danger">{formData.heightErr}</small> }
+                                    {errors.height.dirty && errors.height.error ? (<small className="text-danger">{errors.height.message}</small> ) : null}
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Width (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="width" value={formData.width} onChange={setData('width')}/>
+                                        <input type="number" className="form-control" id="width" value={form.width} onChange={onUpdateField} onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        {formData.weightErr !== false  && <small className="text-danger">{formData.weightErr}</small> }
+                                    {errors.width.dirty && errors.width.error ? (<small className="text-danger">{errors.width.message}</small> ) : null}
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Length (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="length" value={formData.length} onChange={setData('length')}/>
+                                        <input type="number" className="form-control" id="length" value={form.length} onChange={onUpdateField} onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        {formData.lengthErr !== false  && <small className="text-danger">{formData.lengthErr}</small> }
+                                    {errors.length.dirty && errors.length.error ? (<small className="text-danger">{errors.length.message}</small> ) : null}
                                     </div>
                                 </div>
                             </div>
                             )}
 
-                            {formData.productType === "Book" && (
+                            {form.productType === "Book" && (
                             <div className="" id="book">
                                 <div className="row mb-3"  >
                                     <label className="col-sm-2 col-form-label">Weight(Kg)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="weight" value={formData.weight} onChange={setData('weight')}/>
+                                        <input type="number" className="form-control" id="weight" value={form.weight} onChange={onUpdateField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                        {formData.weightErr !== false  && <small className="text-danger">{formData.weightErr}</small> }
+                                    {errors.weight.dirty && errors.weight.error ? (<small className="text-danger">{errors.weight.message}</small> ) : null}
                                     </div>
                                 </div>
                             </div>

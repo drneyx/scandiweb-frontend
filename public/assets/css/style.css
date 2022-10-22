@@ -1,0 +1,121 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} /*  functions and mixins for reusability */
+body {
+  background: #272727;
+  color: #fff;
+}
+
+.header-section .top {
+  border-bottom: thin solid #df4848;
+}
+.header-section .product-title {
+  font-weight: 500;
+  font-size: x-large;
+}
+.header-section .group-button {
+  width: 25% !important;
+}
+@media (max-width: 800px) {
+  .header-section .group-button {
+    width: 50% !important;
+  }
+}
+@media (max-width: 800px) {
+  .header-section .icon {
+    display: none;
+  }
+}
+
+.product-button {
+  background-color: #df4848;
+  border-radius: 5px;
+  font-size: medium;
+  width: 60%;
+  color: #fff;
+}
+
+.product-button-inline {
+  background-color: #fff;
+  border-radius: 5px;
+  font-size: medium;
+  width: 60%;
+  color: #df4848;
+  border: thin solid #df4848;
+}
+
+.btn:hover {
+  background-color: #fff;
+  border-radius: 5px;
+  font-size: medium;
+  width: 60%;
+  color: #df4848;
+  border: thin solid #df4848;
+}
+
+.content-section {
+  min-height: 78vh;
+  overflow-y: scroll;
+}
+.text-accent {
+  color: #df4848;
+}
+
+.main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 80%;
+  margin: 0 auto;
+}
+.main .main-page-section, .main .main-page-section2 {
+  font-weight: 400;
+}
+@media (max-width: 800px) {
+  .main {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
+.light {
+  background: white !important;
+  color: black !important;
+}
+
+.product-box .inner-box {
+  position: relative;
+}
+.product-box .check-form {
+  position: absolute;
+  top: 0.1rem;
+  left: 1rem;
+}
+.product-box #delete-checkbox:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+.product-box .form-check-input:checked {
+  border-color: #df4848 !important;
+  background-color: #df4848 !important;
+}
+
+.footer-section {
+  min-height: 6vh;
+  border-top: thin solid #df4848;
+}/*# sourceMappingURL=style.css.map */

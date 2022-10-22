@@ -1,0 +1,152 @@
+@import './resets';
+@import './variables';
+
+
+/*  functions and mixins for reusability */
+@function wight($wight-name){
+    @return map-get($font-wights, $wight-name);
+}
+
+
+@mixin buttons($background, $color){
+    background-color: $background;
+    border-radius: 5px;
+    font-size: medium;
+    width: 60%;
+    color: $color;
+}
+
+
+@mixin flexCenter($direction){
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: $direction
+}
+
+
+@mixin theme($light-theme: true){
+    @if $light-theme{
+        background: lighten($primary-color, 100%) !important;
+        color: darken($secondary-color, 100%) !important;
+    }
+}
+
+@mixin  mobile {
+    @media (max-width: $mobile) {
+        @content;
+    }
+    
+}
+body {
+    background: $primary-color;
+    color: $secondary-color;
+}
+
+.header-section{
+
+    .top {
+        border-bottom: thin solid $accent-color;
+    }
+
+    .product-title{
+        font-weight: wight(medium);
+        font-size: x-large;
+    }
+
+    .group-button{
+        width: 25% !important;
+
+        @include mobile{
+            width:50% !important;
+        }
+    }
+
+    .icon{
+        @include mobile{
+            display: none;
+        }
+
+    }
+}
+
+.product-button {
+   @include buttons($accent-color, $secondary-color)
+}
+
+.product-button-inline {
+    @include buttons($secondary-color, $accent-color);
+    border: thin solid $accent-color;
+ }
+
+ .btn:hover{
+    @include buttons($secondary-color, $accent-color);
+    border: thin solid $accent-color;
+ }
+
+
+.content-section{
+    min-height: 78vh;
+    overflow-y: scroll;
+   
+
+    #{&}-products{
+        // border: thin solid $accent-color;
+
+    }
+}
+
+.text-accent{
+    color: $accent-color;
+}
+
+.main{
+    @include flexCenter(row);
+    width: 80%;
+    margin: 0 auto;
+
+    #{&}-page-section{
+        font-weight: wight(regular)
+    }
+
+    #{&}-page-section2{
+        @extend .main-page-section;
+    }
+
+
+    @include mobile{
+        flex-direction: column;
+    }
+}
+
+
+.light {
+    @include theme(true)
+}
+
+
+.product-box{
+    // border: thin solid $primary-color;
+
+    .inner-box{
+        position: relative;
+    }
+
+    .check-form{
+        position: absolute;
+        top: .1rem;
+        left: 1rem;
+    }
+    #delete-checkbox:focus{
+        box-shadow: none !important;
+    }
+    .form-check-input:checked{
+        border-color: $accent-color !important;
+        background-color: $accent-color !important;
+    }
+}
+
+.footer-section{
+    min-height: 6vh;
+    border-top: thin solid $accent-color;
+}

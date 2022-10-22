@@ -1,4 +1,5 @@
 import React, { Component} from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, NavbarBrand} from 'reactstrap';
 
 class ListHeader extends Component {
@@ -9,12 +10,13 @@ class ListHeader extends Component {
                 <div className="container flex-grow-1 d-flex mt-4">
                     <div className="w-100 d-flex justify-content-between mt-3 top">
                         <div className="d-flex justify-content-start align-items-start py-2">
-                            <span className="product-title">Product List</span>
+                           <span className="product-title">Product List</span>
                         </div>
                         <div className="ms-auto group-button  d-flex justify-content-between align-items-start py-2">
-                            <button className="btn btn-sm btn-default product-button-inline mx-2">
+                            <Link to="addProduct" className="btn btn-sm btn-default product-button-inline mx-2" id="addProduct"> 
                                 <span>Add</span>
-                            </button>
+                            </Link>
+                            
                             <button className="btn btn-sm btn-default product-button text-nowrap"> Mass delete</button>
                         </div>
                     </div>

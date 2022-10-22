@@ -16,7 +16,7 @@ class Main extends Component {
       <div>
         <Routes>
             <Route path="/" element={<ProductList/>}/>
-            <Route path="addProduct"  element={<ProductAdd/>}/>
+            <Route path="/addProduct"  element={<ProductAdd/>}/>
             <Route path="*" element={<ProductList/>}/>
         </Routes>
         <Footer/>

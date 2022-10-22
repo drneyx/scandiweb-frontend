@@ -1,31 +1,38 @@
 import React from 'react';
+import AddProductHeader from '../components/AddHeaderComponent';
 
 /*-- Add Product Section -- */
 function ProductAdd(){
 
+    function submitData(e){
+        e.preventDefault();
+
+        console.log("Submit clicked");
+    }
+
     return (
         <div>
-            <ProductAdd/>
+            <AddProductHeader/>
             <section className="content-section">
                 <div className="container">
                     <div className="w-100 content-section-products mt-2">
-                        <form method="POST" id="product_form" action="includes/product.inc.php" className="mt-3">
+                        <form method="POST" id="product_form" action="#" className="mt-3" onSubmit={submitData}>
                             <div className="row mb-3">
-                                <label for="sku" className="col-sm-2 col-form-label">SKU</label>
+                                <label className="col-sm-2 col-form-label">SKU</label>
                                 <div className="col-sm-4">
                                     <input type="text" className="form-control" id="sku"/>
                                     <small className="text-danger d-none" id="skuCheck">Please, Enter SKU</small>
                                 </div>
                             </div>
                             <div className="row mb-3">
-                                <label for="name" className="col-sm-2 col-form-label">Name</label>
+                                <label className="col-sm-2 col-form-label">Name</label>
                                 <div className="col-sm-4">
                                     <input type="text" className="form-control" id="name"/>
                                     <small className="text-danger d-none" id="nameCheck">Please, enter the name of the product</small>
                                 </div>
                             </div>
                             <div className="row mb-3">
-                                <label for="price" className="col-sm-2 col-form-label">Price($)</label>
+                                <label className="col-sm-2 col-form-label">Price($)</label>
                                 <div className="col-sm-4">
                                     <input type="number" className="form-control" id="price"/>
                                     <small className="text-danger d-none" id="priceCheck">Please, enter the price of the product</small>
@@ -33,10 +40,10 @@ function ProductAdd(){
                             </div>
         
                             <div className="row mb-3">
-                                <label for="productType" className="col-sm-2 col-form-label">Type Switcher</label>
+                                <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
                                     <select className="form-select" aria-label="Default select example" id="productType">
-                                        <option selected value="">Select</option>
+                                        <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
                                         <option value="Book">Book</option>
@@ -46,7 +53,7 @@ function ProductAdd(){
                             </div>
                             <div className="d-none" id="dvd">
                                 <div className="row mb-3">
-                                    <label for="size" className="col-sm-2 col-form-label">Size(MB)</label>
+                                    <label className="col-sm-2 col-form-label">Size(MB)</label>
                                     <div className="col-sm-4">
                                         <input type="number" className="form-control" id="size"/>
                                     </div>
@@ -61,19 +68,19 @@ function ProductAdd(){
         
                             <div id="furniture" className="d-none">
                                 <div className="row mb-3">
-                                    <label for="height" className="col-sm-2 col-form-label">Height (CM)</label>
+                                    <label className="col-sm-2 col-form-label">Height (CM)</label>
                                     <div className="col-sm-4">
                                         <input type="number" className="form-control" id="height"/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
-                                    <label for="height" className="col-sm-2 col-form-label">Width (CM)</label>
+                                    <label className="col-sm-2 col-form-label">Width (CM)</label>
                                     <div className="col-sm-4">
                                         <input type="number" className="form-control" id="width"/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
-                                    <label for="height" className="col-sm-2 col-form-label">Length (CM)</label>
+                                    <label className="col-sm-2 col-form-label">Length (CM)</label>
                                     <div className="col-sm-4">
                                         <input type="number" className="form-control" id="length"/>
                                     </div>
@@ -88,7 +95,7 @@ function ProductAdd(){
         
                             <div className="d-none" id="book">
                                 <div className="row mb-3"  >
-                                    <label for="weight" className="col-sm-2 col-form-label">Weight(Kg)</label>
+                                    <label className="col-sm-2 col-form-label">Weight(Kg)</label>
                                     <div className="col-sm-4">
                                         <input type="number" className="form-control" id="weight"/>
                                     </div>

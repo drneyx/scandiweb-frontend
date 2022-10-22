@@ -1,9 +1,8 @@
 import React from 'react';
 
-
+ /* Footer section */
 function Footer(props) {
     return (
-        /* Footer section */
         <footer>
             <div className="container">
                 <div className="d-flex justify-content-center align-items-center footer-section">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function AddProductHeader () {
 
@@ -11,7 +12,7 @@ function AddProductHeader () {
                     </div>
                     <div className="ms-auto group-button  d-flex justify-content-between align-items-start py-2">
                         <button type="submit" form="product_form" className="btn btn-sm btn-default product-button-inline mx-2">Save</button>
-                        <button className="btn btn-sm btn-default product-button text-nowrap"> Cancel</button>
+                        <Link to="/" id="cancel" className="btn btn-sm btn-default product-button text-nowrap"> Cancel</Link>
                     </div>
                 </div>
             </div>

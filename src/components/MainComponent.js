@@ -1,5 +1,4 @@
 import React, { Component} from 'react';
-import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import ProductList from '../pages/productList';
 import ProductAdd from '../pages/addProduct';
@@ -15,15 +14,12 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <Header/>
-            <Routes>
-                <Route path="/" element={<ProductList/>}/>
-                <Route path="addProduct"  element={<ProductAdd/>}/>
-                <Route path="*" element={<ProductList/>}/>
-            </Routes>
-         <Footer/>
-       
-        
+        <Routes>
+            <Route path="/" element={<ProductList/>}/>
+            <Route path="addProduct"  element={<ProductAdd/>}/>
+            <Route path="*" element={<ProductList/>}/>
+        </Routes>
+        <Footer/>
       </div>
     );
   }

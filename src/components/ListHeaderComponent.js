@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import { Navbar, NavbarBrand} from 'reactstrap';
 
-class Header extends Component {
+class ListHeader extends Component {
     render() {
         return (
             <>
@@ -26,4 +26,4 @@ class Header extends Component {
 }
 
 
-export default Header;
+export default ListHeader;

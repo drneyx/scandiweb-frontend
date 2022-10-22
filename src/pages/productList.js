@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductItem from '../components/ProductItems';
 import axios from 'axios';
+import ListHeader from '../components/ListHeaderComponent';
 
 function ProductList(){
 
@@ -25,6 +26,7 @@ function ProductList(){
 
     return(
         <div>
+            <ListHeader/>
             <section className="content-section">
                 <div className="container">
                     <div className="w-100 content-section-products mt-2">

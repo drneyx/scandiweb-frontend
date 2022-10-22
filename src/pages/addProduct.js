@@ -1,13 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import AddProductHeader from '../components/AddHeaderComponent';
 
 /*-- Add Product Section -- */
 function ProductAdd(){
 
+    const [formData, setFormData] = useState({ 
+        sku: '', 
+        name: '',
+        price: '', 
+        productType: '',
+        size: '',
+        height: '',
+        width: '',
+        length: '',
+        weight: '',
+      });
+    
+      
+    const setData = name => {
+        return ({ target: { value } }) => {
+          setFormData(oldData => (
+            {...oldData, 
+                [name]: value 
+            }
+            ));
+        }
+    };
+
+
     function submitData(e){
         e.preventDefault();
-
         console.log("Submit clicked");
+        console.log(formData);
     }
 
     return (
@@ -20,21 +44,21 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">SKU</label>
                                 <div className="col-sm-4">
-                                    <input type="text" className="form-control" id="sku"/>
+                                    <input type="text" className="form-control" id="sku" value={formData.sku} onChange={setData('sku')}/>
                                     <small className="text-danger d-none" id="skuCheck">Please, Enter SKU</small>
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Name</label>
                                 <div className="col-sm-4">
-                                    <input type="text" className="form-control" id="name"/>
+                                    <input type="text" className="form-control" id="name" value={formData.name} onChange={setData('name')}/>
                                     <small className="text-danger d-none" id="nameCheck">Please, enter the name of the product</small>
                                 </div>
                             </div>
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Price($)</label>
                                 <div className="col-sm-4">
-                                    <input type="number" className="form-control" id="price"/>
+                                    <input type="number" className="form-control" id="price" value={formData.price} onChange={setData('price')}/>
                                     <small className="text-danger d-none" id="priceCheck">Please, enter the price of the product</small>
                                 </div>
                             </div>
@@ -42,7 +66,7 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" aria-label="Default select example" id="productType">
+                                    <select className="form-select" aria-label="Default select example" id="productType" value={formData.productType} onChange={setData('productType')}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
@@ -55,7 +79,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Size(MB)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="size"/>
+                                        <input type="number" className="form-control" id="size" value={formData.size} onChange={setData('size')} />
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -70,19 +94,19 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Height (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="height"/>
+                                        <input type="number" className="form-control" id="height" value={formData.height} onChange={setData('height')}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Width (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="width"/>
+                                        <input type="number" className="form-control" id="width" value={formData.width} onChange={setData('width')}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Length (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="length"/>
+                                        <input type="number" className="form-control" id="length" value={formData.length} onChange={setData('length')}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -97,7 +121,7 @@ function ProductAdd(){
                                 <div className="row mb-3"  >
                                     <label className="col-sm-2 col-form-label">Weight(Kg)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="weight"/>
+                                        <input type="number" className="form-control" id="weight" value={formData.weight} onChange={setData('weight')}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">

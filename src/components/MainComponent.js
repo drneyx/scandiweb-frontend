@@ -29,13 +29,16 @@ class Main extends Component {
 
     return (
       <div>
+       
         <Header/>
             <Routes>
                 <Route path="/" element={<ProductList/>}/>
                 <Route exact path="/menu"  element={<Menu dishes={this.state.dishes}/>}/>
                 {/* <Route path="/" element={<Navigate to ="/home" />}/> */}
             </Routes>
-       <Footer/>
+         <Footer/>
+       
+        
       </div>
     );
   }

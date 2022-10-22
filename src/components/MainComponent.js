@@ -8,7 +8,7 @@ import { DISHES } from '../shared/dishes';
 import DishDetail from './DishdetailComponent';
 import Home from './HomeComponent';
 import {Routes, Route, Navigate } from 'react-router-dom';
-
+import axios from 'axios';
 
 class Main extends Component {
 
@@ -16,8 +16,17 @@ class Main extends Component {
     super(props);
 
     this.state = {
-      dishes: DISHES,
+      products: [],
     };    
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:8888/php-api/products`)
+      .then(res => {
+        const products = res.data;
+        console.log(products);
+        this.setState({ products });
+      })
   }
 
   render() {

@@ -3,6 +3,7 @@ import { Navbar, NavbarBrand } from 'reactstrap';
 import  Menu  from './MenuComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
+import ProductList from '../pages/productList';
 import { DISHES } from '../shared/dishes';
 import DishDetail from './DishdetailComponent';
 import Home from './HomeComponent';
@@ -30,9 +31,9 @@ class Main extends Component {
       <div>
         <Header/>
             <Routes>
-                <Route path="/home" element={<HomePage/>}/>
+                <Route path="/" element={<ProductList/>}/>
                 <Route exact path="/menu"  element={<Menu dishes={this.state.dishes}/>}/>
-                <Route path="/" element={<Navigate to ="/home" />}/>
+                {/* <Route path="/" element={<Navigate to ="/home" />}/> */}
             </Routes>
        <Footer/>
       </div>

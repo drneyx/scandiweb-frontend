@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 function ProductItem(props){
     return (
         <div key={props.product.id} className="col-6 col-md-3 mb-3">
@@ -13,7 +12,12 @@ function ProductItem(props){
                         <small className="card-text my-0">{props.product.sku}</small>
                         <small className="card-text my-0">{props.product.name}</small>
                         <small className="card-text my-0">{props.product.price} $</small>
-                        <small className="card-text my-0">165 views - 58 hours ago</small>
+                        <small className="card-text my-0">Size: {props.product.size} MB</small>
+                        <small className="card-text my-0">Weight: {props.product.wight} kG</small>
+                        <small className="card-text my-0">Dimension: {props.product.height}x{props.product.width}x{props.product.length}</small>
+
+
+
                     </div>
                 </div>
             </div>

@@ -6,7 +6,13 @@ function ProductItem(props){
             <div className="card product-box">
                 <div className="d-flex align-items-center justify-content-center inner-box">
                     <div className="form-check mt-2 check-form">
-                        <input className="form-check-input" type="checkbox" id="delete-checkbox" value=""/>
+                        <input 
+                        className="form-check-input" 
+                        type="checkbox" 
+                        id={props.id}
+                        name={props.name}
+                        onChange={props.checkboxChange}
+                        value={props.id}/>
                     </div>
                     <div className="d-flex align-items-center justify-content-center my-4 flex-column ">
                         <small className="card-text my-0">{props.product.sku}</small>

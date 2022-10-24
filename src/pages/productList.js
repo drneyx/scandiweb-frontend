@@ -7,6 +7,7 @@ import ListHeader from '../components/ListHeaderComponent';
 function ProductList(){
 
     const [products, setProducts] = useState([]);
+    const [checkedProduct, setCheckedProduct] = useState([]);
 
     useEffect(function() {
         axios.get(`http://localhost:8888/php-api/products`)
@@ -16,11 +17,27 @@ function ProductList(){
         })
       }, []);
 
+
+    function  oncheckBoxProductChange (e) {
+        var updatedList = [...checkedProduct];
+        if (e.target.checked) {
+          updatedList = [...checkedProduct, e.target.value];
+        } else {
+          updatedList.splice(checkedProduct.indexOf(e.target.value), 1);
+        }
+        setCheckedProduct(updatedList);
+    }
+
+    console.log(checkedProduct);
+    
     
     /* --- Render all products --- */
     const renderProductItems = products.map((product) => {
         return (
-          <ProductItem key={product.id} product={product}/>
+          <ProductItem 
+          key={product.id} 
+          product={product}  
+          checkboxChange={oncheckBoxProductChange}/>
         );
     });
 

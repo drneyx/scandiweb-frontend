@@ -3,6 +3,7 @@ import clsx from "clsx";
 import AddProductHeader from '../components/AddHeaderComponent';
 import { useFormValidator } from '../hooks/useFormValidator';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 /*-- Add Product Section -- */
 function ProductAdd(){
 
@@ -16,10 +17,12 @@ function ProductAdd(){
         width: '',
         length: '',
         weight: '',
+        
       });
 
+    const [skuErr, setSkuErr] = useState(false)
     const { errors, validateForm, onBlurField } = useFormValidator(form);
- 
+    const navigate = useNavigate();
 
     const onUpdateField = e => {
         const field = e.target.name;
@@ -28,6 +31,7 @@ function ProductAdd(){
           [field]: e.target.value,
         };
         setForm(nextFormState);
+        setSkuErr(false);
         if (errors[field].dirty)
           validateForm({
             form: nextFormState,
@@ -37,23 +41,27 @@ function ProductAdd(){
       };
 
 
-
     function submitData(e){
         e.preventDefault();
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
         if (!isValid) return;
 
         /* Form is clean and ready to be submitted */
-        axios.post("https://192.236.162.91/api/product/add-product", this.productData)
-            .then((response) => {
-                console.log(response);
-            })
+        axios
+        .post(`http://localhost:8888/php-api/products`, form, {
+        })
+        .then(function (res) {
+            if (res.data === 1) {
+                navigate('/');
+            }
+        })
         .catch((e) => {
-          if (e.response.data.skuErr) {
-            console.log("Please submit a valid unique sku");
-          }
+            if (e.response.data.skuErr) {
+               setSkuErr(true);
+            }
         })
     }
+
 
     return (
         <div>
@@ -67,6 +75,7 @@ function ProductAdd(){
                                 <div className="col-sm-4">
                                     <input type="text" className="form-control" id="sku" name="sku" value={form.sku} onChange={onUpdateField}  onBlur={onBlurField}/>
                                     {errors.sku.dirty && errors.sku.error ? (<small className="text-danger">{errors.sku.message}</small> ) : null}
+                                    {skuErr ? (<small className="text-danger">Sku Already exists, Please submit unique sku</small> ) : null}
                                 </div>
                             </div>
                             <div className="row mb-3">

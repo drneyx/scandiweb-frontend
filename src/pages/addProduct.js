@@ -4,6 +4,8 @@ import AddProductHeader from '../components/AddHeaderComponent';
 import { useFormValidator } from '../hooks/useFormValidator';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+
 /*-- Add Product Section -- */
 function ProductAdd(){
 
@@ -17,7 +19,6 @@ function ProductAdd(){
         width: '',
         length: '',
         weight: '',
-        
       });
 
     const [skuErr, setSkuErr] = useState(false)

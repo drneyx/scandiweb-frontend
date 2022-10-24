@@ -89,13 +89,13 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" name="productType" aria-label="Default select example" id="productType" value={form.productType} onChange={onUpdateField} onBlur={onBlurField}>
+                                    <select className="form-select" name="productType" aria-label="Default select example" id="productType" value={form.productType} onChange={onUpdateField}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
                                         <option value="Book">Book</option>
                                     </select>
-                                    {errors.type.dirty && errors.type.error ? (<small className="text-danger">{errors.type.message}</small> ) : null}
+                                    {errors.productType.dirty && errors.productType.error ? (<small className="text-danger">{errors.productType.message}</small> ) : null}
                                 </div>
                             </div>
                             {form.productType === "DVD" && (
@@ -103,7 +103,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Size(MB)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="size" value={form.size} onChange={onUpdateField}  onBlur={onBlurField}/>
+                                        <input type="number" className="form-control" name="size" id="size" value={form.size} onChange={onUpdateField}  onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -120,7 +120,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Height (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="height" value={form.height} onChange={onUpdateField} onBlur={onBlurField}/>
+                                        <input type="number" className="form-control" name="height" id="height" value={form.height} onChange={onUpdateField} onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -132,7 +132,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Width (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="width" value={form.width} onChange={onUpdateField} onBlur={onBlurField}/>
+                                        <input type="number" name="width" className="form-control" id="width" value={form.width} onChange={onUpdateField} onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -144,7 +144,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Length (CM)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="length" value={form.length} onChange={onUpdateField} onBlur={onBlurField}/>
+                                        <input type="number" name="length" className="form-control" id="length" value={form.length} onChange={onUpdateField} onBlur={onBlurField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -161,7 +161,7 @@ function ProductAdd(){
                                 <div className="row mb-3"  >
                                     <label className="col-sm-2 col-form-label">Weight(Kg)</label>
                                     <div className="col-sm-4">
-                                        <input type="number" className="form-control" id="weight" value={form.weight} onChange={onUpdateField}/>
+                                        <input type="number" name="weight" className="form-control" id="weight" value={form.weight} onChange={onUpdateField}/>
                                     </div>
                                 </div>
                                 <div className="row mb-3">

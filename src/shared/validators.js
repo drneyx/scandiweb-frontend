@@ -35,7 +35,7 @@ export const productTypeValidator = productType => {
 
 export const sizeValidator = size => {
     if (!size) {
-      return "Please  provide size";
+      return "Please, provide size (in MB)";
     }else if (!(/^\d+$/.test(size)))  {
         return "Please submit size in n format";
       }
@@ -45,7 +45,7 @@ export const sizeValidator = size => {
 
 export const weightValidator = weight => {
     if (!weight) {
-      return "Please  provide weight";
+      return "Please, provide weight (in KG)";
     }else if (!(/^[1-9]\d*$|^[0-9]+\.[0-9]+$/.test(weight)))  {
         return "Please submit weight in n format";
       }

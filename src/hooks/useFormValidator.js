@@ -110,48 +110,55 @@ export const useFormValidator = form => {
         if (!!priceMessage) isValid = false;
     }
 
-    if (nextErrors.productType.dirty && (field ? field === "type" : true)) {
+    if (nextErrors.productType.dirty && (field ? field === "productType" : true)) {
         const typeMessage = productTypeValidator(productType, form);
         nextErrors.productType.error = !!typeMessage;
         nextErrors.productType.message = typeMessage;
         if (!!typeMessage) isValid = false;
     }
 
-    if (nextErrors.size.dirty && (field ? field === "size" : true)) {
-        const sizeMessage = sizeValidator(size, form);
-        nextErrors.size.error = !!sizeMessage;
-        nextErrors.size.message = sizeMessage;
-        if (!!sizeMessage) isValid = false;
+   
+    if (productType == "DVD"){
+        if (nextErrors.size.dirty && (field ? field === "size" : true)) {
+            const sizeMessage = sizeValidator(size, form);
+            nextErrors.size.error = !!sizeMessage;
+            nextErrors.size.message = sizeMessage;
+            if (!!sizeMessage) isValid = false;
+        }
     }
-
-    if (nextErrors.weight.dirty && (field ? field === "weight" : true)) {
-        const weightMessage = weightValidator(weight, form);
-        nextErrors.weight.error = !!weightMessage;
-        nextErrors.weight.message = weightMessage;
-        if (!!weightMessage) isValid = false;
+    else if (productType === "Book"){
+        if (nextErrors.weight.dirty && (field ? field === "weight" : true)) {
+            const weightMessage = weightValidator(weight, form);
+            nextErrors.weight.error = !!weightMessage;
+            nextErrors.weight.message = weightMessage;
+            if (!!weightMessage) isValid = false;
+        }
     }
+    else if (productType === "Furniture"){
+        if (nextErrors.height.dirty && (field ? field === "height" : true)) {
+            const heightMessage = heightValidator(height, form);
+            nextErrors.height.error = !!heightMessage;
+            nextErrors.height.message = heightMessage;
+            if (!!heightMessage) isValid = false;
+        }
 
 
-    if (nextErrors.height.dirty && (field ? field === "height" : true)) {
-        const heightMessage = heightValidator(height, form);
-        nextErrors.height.error = !!heightMessage;
-        nextErrors.height.message = heightMessage;
-        if (!!heightMessage) isValid = false;
+        if (nextErrors.length.dirty && (field ? field === "length" : true)) {
+            const lengthMessage = lengthValidator(length, form);
+            nextErrors.length.error = !!lengthMessage;
+            nextErrors.length.message = lengthMessage;
+            if (!!lengthMessage) isValid = false;
+        }
+
+        if (nextErrors.width.dirty && (field ? field === "width" : true)) {
+            const widthMessage = widthValidator(width, form);
+            nextErrors.width.error = !!widthMessage;
+            nextErrors.width.message = widthMessage;
+            if (!!widthMessage) isValid = false;
+        }
     }
-
-
-    if (nextErrors.length.dirty && (field ? field === "length" : true)) {
-        const lengthMessage = lengthValidator(length, form);
-        nextErrors.length.error = !!lengthMessage;
-        nextErrors.length.message = lengthMessage;
-        if (!!lengthMessage) isValid = false;
-    }
-
-    if (nextErrors.width.dirty && (field ? field === "width" : true)) {
-        const widthMessage = widthValidator(width, form);
-        nextErrors.width.error = !!widthMessage;
-        nextErrors.width.message = widthMessage;
-        if (!!widthMessage) isValid = false;
+    else {
+        console.log(productType);
     }
 
     setErrors(nextErrors);

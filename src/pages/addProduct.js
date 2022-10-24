@@ -16,16 +16,6 @@ function ProductAdd(){
         width: '',
         length: '',
         weight: '',
-
-        skuErr: false,
-        nameErr: false,
-        priceErr: false,
-        selectedErr: false,
-        sizeErr: false,
-        heightErr: false,
-        widthErr: false,
-        lengthErr: false,
-        weightErr: false,
       });
 
     const { errors, validateForm, onBlurField } = useFormValidator(form);
@@ -89,7 +79,7 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" name="productType" aria-label="Default select example" id="productType" value={form.productType} onChange={onUpdateField}>
+                                    <select className="form-select" name="productType" aria-label="Default select example" id="productType" value={form.productType} onChange={onUpdateField} onBlur={onBlurField}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
@@ -109,7 +99,8 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                    {errors.size.dirty && errors.size.error ? (<small className="text-danger">{errors.size.message}</small> ) : null}
+                                    {errors.size.dirty && errors.size.error ? (<small className="text-danger">{errors.size.message}</small> ) : <small className="text-dark fw-bold">Please, provide size (in MB)</small>}
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +117,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                    {errors.height.dirty && errors.height.error ? (<small className="text-danger">{errors.height.message}</small> ) : null}
+                                    {/* {errors.height.dirty && errors.height.error ? (<small className="text-danger">{errors.height.message}</small> ) : <small className="text-dark fw-bold">Please, provide size</small>} */}
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -138,7 +129,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                    {errors.width.dirty && errors.width.error ? (<small className="text-danger">{errors.width.message}</small> ) : null}
+                                    {/* {errors.width.dirty && errors.width.error ? (<small className="text-danger">{errors.width.message}</small> ) : null} */}
                                     </div>
                                 </div>
                                 <div className="row mb-3">
@@ -150,7 +141,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                    {errors.length.dirty && errors.length.error ? (<small className="text-danger">{errors.length.message}</small> ) : null}
+                                    {errors.length.dirty && errors.length.error || errors.width.dirty && errors.width.error || errors.height.dirty && errors.height.error ? (<small className="text-danger">Please, provide dimensions (in HxWxL)</small> ) : <small className="text-dark fw-bold">Please, provide dimensions (in HxWxL)</small> }
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +158,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                    {errors.weight.dirty && errors.weight.error ? (<small className="text-danger">{errors.weight.message}</small> ) : null}
+                                    {errors.weight.dirty && errors.weight.error ? (<small className="text-danger">{errors.weight.message}</small> ) : <small className="text-dark fw-bold">Please, provide weight (in kg)</small>}
                                     </div>
                                 </div>
                             </div>

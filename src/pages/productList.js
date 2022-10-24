@@ -34,7 +34,7 @@ function ProductList(){
     }
 
     function massDelete() {
-        axios.delete(`http://localhost:8888/php-api/products`, {data: {productList: checkedProduct}})
+        axios.delete(`http://localhost:8888/php-api/products`, {data: {productIds: checkedProduct}})
             .then((res) => {
                 if (res.data === "success"){
                     refreshPage();

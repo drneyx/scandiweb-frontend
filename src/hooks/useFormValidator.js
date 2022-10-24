@@ -118,7 +118,7 @@ export const useFormValidator = form => {
     }
 
    
-    if (type == "DVD"){
+    if (type === "DVD"){
         if (nextErrors.size.dirty && (field ? field === "size" : true)) {
             const sizeMessage = sizeValidator(size, form);
             nextErrors.size.error = !!sizeMessage;

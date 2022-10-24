@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import clsx from "clsx";
 import AddProductHeader from '../components/AddHeaderComponent';
 import { useFormValidator } from '../hooks/useFormValidator';
 import axios from 'axios';
@@ -159,7 +158,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                    {errors.length.dirty && errors.length.error || errors.width.dirty && errors.width.error || errors.height.dirty && errors.height.error ? (<small className="text-danger">Please, provide dimensions (in HxWxL)</small> ) : <small className="text-dark fw-bold">Please, provide dimensions (in HxWxL)</small> }
+                                    {(errors.length.dirty && errors.length.error) || (errors.width.dirty && errors.width.error) || (errors.height.dirty && errors.height.error) ? (<small className="text-danger">Please, provide dimensions (in HxWxL)</small> ) : <small className="text-dark fw-bold">Please, provide dimensions (in HxWxL)</small> }
                                     </div>
                                 </div>
                             </div>

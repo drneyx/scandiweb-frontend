@@ -1,7 +1,7 @@
-import React, { Component} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, NavbarBrand} from 'reactstrap';
 
+/* Product list header */
 function ListHeader (props) {
         return (
             <>
@@ -16,7 +16,7 @@ function ListHeader (props) {
                                 <span>Add</span>
                             </Link>
                             
-                            <button className="btn btn-sm btn-default product-button text-nowrap" onClick={props.submit}> Mass delete</button>
+                            <button className="btn btn-sm btn-default product-button text-nowrap" id="delete-product-btn" onClick={props.submit}> Mass delete</button>
                         </div>
                     </div>
                 </div>

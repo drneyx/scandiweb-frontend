@@ -2,8 +2,7 @@ import React, { Component} from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, NavbarBrand} from 'reactstrap';
 
-class ListHeader extends Component {
-    render() {
+function ListHeader (props) {
         return (
             <>
             <header className="header-section">
@@ -17,14 +16,13 @@ class ListHeader extends Component {
                                 <span>Add</span>
                             </Link>
                             
-                            <button className="btn btn-sm btn-default product-button text-nowrap"> Mass delete</button>
+                            <button className="btn btn-sm btn-default product-button text-nowrap" onClick={props.submit}> Mass delete</button>
                         </div>
                     </div>
                 </div>
             </header>
             </>
         )
-    }
 }
 
 

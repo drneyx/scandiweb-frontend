@@ -53,7 +53,7 @@ function ProductAdd(){
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
         if (!isValid) return;
 
-        // console.log("Form is clean");
+        console.log("Form is clean");
         // console.log(formData);
     }
 

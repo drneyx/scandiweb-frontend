@@ -40,7 +40,7 @@ export const useFormValidator = form => {
         error: false,
         message: "",
       },
-      type: {
+      productType: {
         dirty: false,
         error: false,
         message: "",
@@ -85,7 +85,7 @@ export const useFormValidator = form => {
         nextErrors = touchErrors(errors);
       }
     
-    const { sku, name, price, type, size, weight, height, length, width } = form;
+    const { sku, name, price, productType, size, weight, height, length, width } = form;
 
     if (nextErrors.sku.dirty && (field ? field === "sku" : true)) {
         const skuMessage = skuValidator(sku, form);
@@ -110,10 +110,10 @@ export const useFormValidator = form => {
         if (!!priceMessage) isValid = false;
     }
 
-    if (nextErrors.type.dirty && (field ? field === "type" : true)) {
-        const typeMessage = productTypeValidator(type, form);
-        nextErrors.type.error = !!typeMessage;
-        nextErrors.type.message = typeMessage;
+    if (nextErrors.productType.dirty && (field ? field === "type" : true)) {
+        const typeMessage = productTypeValidator(productType, form);
+        nextErrors.productType.error = !!typeMessage;
+        nextErrors.productType.message = typeMessage;
         if (!!typeMessage) isValid = false;
     }
 

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import clsx from "clsx";
 import AddProductHeader from '../components/AddHeaderComponent';
 import { useFormValidator } from '../hooks/useFormValidator';
-
+import axios from 'axios';
 /*-- Add Product Section -- */
 function ProductAdd(){
 
@@ -10,7 +10,7 @@ function ProductAdd(){
         sku: '', 
         name: '',
         price: '', 
-        productType: '',
+        type: '',
         size: '',
         height: '',
         width: '',
@@ -43,8 +43,16 @@ function ProductAdd(){
         const { isValid } = validateForm({ form, errors, forceTouchErrors: true });
         if (!isValid) return;
 
-        console.log("Form is clean");
-        // console.log(formData);
+        /* Form is clean and ready to be submitted */
+        axios.post("https://192.236.162.91/api/product/add-product", this.productData)
+            .then((response) => {
+                console.log(response);
+            })
+        .catch((e) => {
+          if (e.response.data.skuErr) {
+            console.log("Please submit a valid unique sku");
+          }
+        })
     }
 
     return (
@@ -79,16 +87,16 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" name="productType" aria-label="Default select example" id="productType" value={form.productType} onChange={onUpdateField} onBlur={onBlurField}>
+                                    <select className="form-select" name="type" aria-label="Default select example" id="type" value={form.type} onChange={onUpdateField} onBlur={onBlurField}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
                                         <option value="Book">Book</option>
                                     </select>
-                                    {errors.productType.dirty && errors.productType.error ? (<small className="text-danger">{errors.productType.message}</small> ) : null}
+                                    {errors.type.dirty && errors.type.error ? (<small className="text-danger">{errors.type.message}</small> ) : null}
                                 </div>
                             </div>
-                            {form.productType === "DVD" && (
+                            {form.type === "DVD" && (
                             <div className="" id="dvd">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Size(MB)</label>
@@ -106,7 +114,7 @@ function ProductAdd(){
                             </div>
                              )}
 
-                            {form.productType === "Furniture" && (
+                            {form.type === "Furniture" && (
                             <div id="furniture" className="">
                                 <div className="row mb-3">
                                     <label className="col-sm-2 col-form-label">Height (CM)</label>
@@ -147,7 +155,7 @@ function ProductAdd(){
                             </div>
                             )}
 
-                            {form.productType === "Book" && (
+                            {form.type === "Book" && (
                             <div className="" id="book">
                                 <div className="row mb-3"  >
                                     <label className="col-sm-2 col-form-label">Weight(Kg)</label>

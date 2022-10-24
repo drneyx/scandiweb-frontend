@@ -3,7 +3,7 @@ import {
     skuValidator,
     nameValidator,
     priceValidator,
-    productTypeValidator,
+    typeValidator,
     sizeValidator,
     weightValidator,
     widthValidator,
@@ -40,7 +40,7 @@ export const useFormValidator = form => {
         error: false,
         message: "",
       },
-      productType: {
+      type: {
         dirty: false,
         error: false,
         message: "",
@@ -85,7 +85,7 @@ export const useFormValidator = form => {
         nextErrors = touchErrors(errors);
       }
     
-    const { sku, name, price, productType, size, weight, height, length, width } = form;
+    const { sku, name, price, type, size, weight, height, length, width } = form;
 
     if (nextErrors.sku.dirty && (field ? field === "sku" : true)) {
         const skuMessage = skuValidator(sku, form);
@@ -110,15 +110,15 @@ export const useFormValidator = form => {
         if (!!priceMessage) isValid = false;
     }
 
-    if (nextErrors.productType.dirty && (field ? field === "productType" : true)) {
-        const typeMessage = productTypeValidator(productType, form);
-        nextErrors.productType.error = !!typeMessage;
-        nextErrors.productType.message = typeMessage;
+    if (nextErrors.type.dirty && (field ? field === "type" : true)) {
+        const typeMessage = typeValidator(type, form);
+        nextErrors.type.error = !!typeMessage;
+        nextErrors.type.message = typeMessage;
         if (!!typeMessage) isValid = false;
     }
 
    
-    if (productType == "DVD"){
+    if (type == "DVD"){
         if (nextErrors.size.dirty && (field ? field === "size" : true)) {
             const sizeMessage = sizeValidator(size, form);
             nextErrors.size.error = !!sizeMessage;
@@ -126,7 +126,7 @@ export const useFormValidator = form => {
             if (!!sizeMessage) isValid = false;
         }
     }
-    else if (productType === "Book"){
+    else if (type === "Book"){
         if (nextErrors.weight.dirty && (field ? field === "weight" : true)) {
             const weightMessage = weightValidator(weight, form);
             nextErrors.weight.error = !!weightMessage;
@@ -134,7 +134,7 @@ export const useFormValidator = form => {
             if (!!weightMessage) isValid = false;
         }
     }
-    else if (productType === "Furniture"){
+    else if (type === "Furniture"){
         if (nextErrors.height.dirty && (field ? field === "height" : true)) {
             const heightMessage = heightValidator(height, form);
             nextErrors.height.error = !!heightMessage;
@@ -158,7 +158,7 @@ export const useFormValidator = form => {
         }
     }
     else {
-        console.log(productType);
+        console.log(type);
     }
 
     setErrors(nextErrors);

@@ -25,8 +25,8 @@ export const priceValidator = price => {
 };
 
 
-export const productTypeValidator = productType => {
-    if (!productType) {
+export const typeValidator = type => {
+    if (!type) {
       return "Please select product type";
     }
     return "";

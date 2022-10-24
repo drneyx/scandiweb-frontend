@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductItem from '../components/ProductItems';
 import axios from 'axios';
 import ListHeader from '../components/ListHeaderComponent';
+import { useForceUpdate } from "../hooks/forceUpdate";
 
 function ProductList(){
 
     const [products, setProducts] = useState([]);
     const [checkedProduct, setCheckedProduct] = useState([]);
+    const navigate = useNavigate()
+
+    const forceUpdate = useForceUpdate();
 
     useEffect(function() {
         axios.get(`http://localhost:8888/php-api/products`)
@@ -16,6 +20,11 @@ function ProductList(){
           setProducts(productsRes)
         })
       }, []);
+
+
+      function refreshPage(){ 
+        window.location.reload(); 
+      }
 
 
     function  oncheckBoxProductChange (e) {
@@ -31,7 +40,11 @@ function ProductList(){
     function massDelete () {
         axios.delete(`http://localhost:8888/php-api/products`, {data: {productList: checkedProduct}})
             .then((res) => {
-                console.log(res);
+                
+                if (res.data === "success"){
+                    refreshPage();
+                    console.log(res.data);
+                }
             })
             .catch(error => this.err = error.message)
       }

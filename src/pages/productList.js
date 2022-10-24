@@ -28,14 +28,23 @@ function ProductList(){
         setCheckedProduct(updatedList);
     }
 
-    console.log(checkedProduct);
-    
+    function massDelete () {
+        axios.delete(`http://localhost:8888/php-api/products`, {data: {productList: checkedProduct}})
+            .then((res) => {
+                console.log(res);
+            })
+            .catch(error => this.err = error.message)
+      }
+
+ 
     
     /* --- Render all products --- */
     const renderProductItems = products.map((product) => {
         return (
           <ProductItem 
           key={product.id} 
+          id={product.id}
+          name={product.name}
           product={product}  
           checkboxChange={oncheckBoxProductChange}/>
         );
@@ -43,7 +52,7 @@ function ProductList(){
 
     return(
         <div>
-            <ListHeader/>
+            <ListHeader submit={massDelete}/>
             <section className="content-section">
                 <div className="container">
                     <div className="w-100 content-section-products mt-2">

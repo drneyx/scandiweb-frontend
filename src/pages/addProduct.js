@@ -48,7 +48,7 @@ function ProductAdd(){
 
         /* Form is clean and ready to be submitted */
         axios
-        .post(`http://localhost:8888/php-api/products`, form, {
+        .post(`https://scandiweb.farmingcity.org/index.php`, form, {
         })
         .then(function (res) {
             if (res.data === 1) {

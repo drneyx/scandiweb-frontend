@@ -10,7 +10,7 @@ function ProductList(){
 
 
     useEffect(function() {
-        axios.get(`http://localhost:8888/php-api/products`)
+        axios.get(`https://scandiweb.farmingcity.org/index.php`)
         .then(res => {
           const productsRes = res.data;
           setProducts(productsRes)
@@ -34,7 +34,7 @@ function ProductList(){
     }
 
     function massDelete() {
-        axios.delete(`http://localhost:8888/php-api/products`, {data: {productIds: checkedProduct}})
+        axios.delete(`https://scandiweb.farmingcity.org/index.php`, {data: {productIds: checkedProduct}})
             .then((res) => {
                 if (res.data === "success"){
                     refreshPage();

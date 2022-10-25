@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import clsx from "clsx";
 import AddProductHeader from '../components/AddHeaderComponent';
 import { useFormValidator } from '../hooks/useFormValidator';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+
 /*-- Add Product Section -- */
 function ProductAdd(){
 
@@ -17,7 +18,6 @@ function ProductAdd(){
         width: '',
         length: '',
         weight: '',
-        
       });
 
     const [skuErr, setSkuErr] = useState(false)
@@ -48,7 +48,7 @@ function ProductAdd(){
 
         /* Form is clean and ready to be submitted */
         axios
-        .post(`http://localhost:8888/php-api/products`, form, {
+        .post(`https://scandiweb.farmingcity.org/index.php`, form, {
         })
         .then(function (res) {
             if (res.data === 1) {
@@ -96,7 +96,7 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" name="type" aria-label="Default select example" id="type" value={form.type} onChange={onUpdateField} onBlur={onBlurField}>
+                                    <select className="form-select" name="type" aria-label="Default select example" id="productType" value={form.type} onChange={onUpdateField} onBlur={onBlurField}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
@@ -158,7 +158,7 @@ function ProductAdd(){
                                 <div className="row mb-3">
                                     <div className="col-sm-2"></div>
                                     <div className="col-sm-4">
-                                    {errors.length.dirty && errors.length.error || errors.width.dirty && errors.width.error || errors.height.dirty && errors.height.error ? (<small className="text-danger">Please, provide dimensions (in HxWxL)</small> ) : <small className="text-dark fw-bold">Please, provide dimensions (in HxWxL)</small> }
+                                    {(errors.length.dirty && errors.length.error) || (errors.width.dirty && errors.width.error) || (errors.height.dirty && errors.height.error) ? (<small className="text-danger">Please, provide dimensions (in HxWxL)</small> ) : <small className="text-dark fw-bold">Please, provide dimensions (in HxWxL)</small> }
                                     </div>
                                 </div>
                             </div>

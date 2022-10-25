@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/* Add product page header */
 function AddProductHeader () {
-
     return(
         <header className="header-section">
             <div className="container flex-grow-1 d-flex mt-4">

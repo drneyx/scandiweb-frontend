@@ -7,7 +7,7 @@ function ProductItem(props){
                 <div className="d-flex align-items-center justify-content-center inner-box">
                     <div className="form-check mt-2 check-form">
                         <input 
-                        className="form-check-input" 
+                        className="form-check-input delete-checkbox" 
                         type="checkbox" 
                         id={props.id}
                         name={props.name}

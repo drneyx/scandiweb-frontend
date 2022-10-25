@@ -13,10 +13,10 @@ function ListHeader (props) {
                         </div>
                         <div className="ms-auto group-button  d-flex justify-content-between align-items-start py-2">
                             <Link to="addProduct" className="btn btn-sm btn-default product-button-inline mx-2" id="addProduct"> 
-                                <span>Add</span>
+                                ADD
                             </Link>
                             
-                            <button className="btn btn-sm btn-default product-button text-nowrap" id="delete-product-btn" onClick={props.submit}> Mass delete</button>
+                            <button className="btn btn-sm btn-default product-button text-nowrap" id="delete-product-btn" onClick={props.submit}> MASS DELETE</button>
                         </div>
                     </div>
                 </div>

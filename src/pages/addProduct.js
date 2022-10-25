@@ -96,7 +96,7 @@ function ProductAdd(){
                             <div className="row mb-3">
                                 <label className="col-sm-2 col-form-label">Type Switcher</label>
                                 <div className="col-sm-4">
-                                    <select className="form-select" name="type" aria-label="Default select example" id="type" value={form.type} onChange={onUpdateField} onBlur={onBlurField}>
+                                    <select className="form-select" name="type" aria-label="Default select example" id="productType" value={form.type} onChange={onUpdateField} onBlur={onBlurField}>
                                         <option value="">Select</option>
                                         <option value="DVD">DVD</option>
                                         <option value="Furniture">Furniture</option>
